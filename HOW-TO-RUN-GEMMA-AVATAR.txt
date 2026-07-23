@@ -1,0 +1,46 @@
+cd /home/l3ung/gemma-avatar
+export PATH="$HOME/.bun/bin:$PATH"
+./run-all-local.sh
+
+
+1) ONE-LINER COMMAND TO EXECUTE:
+OLLAMA_MODEL=gemma4:26b PATH="$HOME/.bun/bin:$PATH" ./run-all-local.sh
+
+2) OPEN YOUR BROWSER TO:
+http://localhost:3000
+
+
+1) ONE-LINER COMMAND TO EXECUTE:
+OLLAMA_MODEL=gemma4:latest PATH="$HOME/.bun/bin:$PATH" ./run-all-local.sh
+
+2) OPEN YOUR BROWSER TO:
+http://localhost:3000
+
+
+You can switch to `gemma4:26b` with just an environment variable at launch.
+
+Use these 2 commands:
+(1st command):
+cd /home/l3ung/gemma-avatar
+
+(2nd command):
+OLLAMA_MODEL=gemma4:26b PATH="$HOME/.bun/bin:$PATH" ./run-all-local.sh
+
+Then open Microsoft Edge to:
+http://localhost:3000
+
+
+Why this works:
+1. The launch scripts already support model override via `OLLAMA_MODEL`.
+2. If unset, they auto-pick from available Gemma models in fallback order.
+3. No code/file changes are needed.
+
+Relevant scripts:
+- run-all-local.sh
+- start-ollama.sh
+- start-speech-to-speech.sh
+
+What to expect after switching:
+1. Same URL: `http://localhost:3000`
+2. Usually faster/lighter than `31b`
+3. Quality may be slightly lower than `31b` depending on prompt complexity
