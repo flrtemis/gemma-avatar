@@ -1,4 +1,6 @@
-cd /home/l3ung/gemma-avatar
+*IN THE PATH, REPLACE 'USER' WITH YOUR SPECIFIC USERNAME*
+
+cd /home/USER/gemma-avatar
 export PATH="$HOME/.bun/bin:$PATH"
 ./run-all-local.sh
 
@@ -21,7 +23,7 @@ You can switch to `gemma4:26b` with just an environment variable at launch.
 
 Use these 2 commands:
 (1st command):
-cd /home/l3ung/gemma-avatar
+cd /home/USER/gemma-avatar
 
 (2nd command):
 OLLAMA_MODEL=gemma4:26b PATH="$HOME/.bun/bin:$PATH" ./run-all-local.sh
