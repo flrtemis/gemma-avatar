@@ -1,0 +1,159 @@
+(base) l3ung@DESKTOP-D23P7Q4:~$ cd gemma-avatar
+(base) l3ung@DESKTOP-D23P7Q4:~/gemma-avatar$ OLLAMA_MODEL=gemma4:31b PATH="$HOME/.bun/bin:$PATH" ./run-all-local.sh
+============================================================
+ Starting Local Gemma Avatar Stack
+============================================================
+1/3 Starting Ollama LLM Service...
+Waiting for Ollama to initialize...
+Starting Ollama service on http://127.0.0.1:11434...
+Ollama is already running.
+Checking model availability: gemma4:31b...
+Ollama is ready for local Gemma inference.
+2/3 Starting Speech-to-Speech Realtime Pipeline...
+Waiting for models to initialize...
+Activating virtualenv at /home/l3ung/venvs/gemma-avatar-s2s...
+Using local GGUF TTS assets from /home/l3ung/gemma-avatar/models/qwen3-tts-gguf
+Using cached local Qwen3-TTS snapshot: /home/l3ung/.cache/huggingface/hub/models--Qwen--Qwen3-TTS-12Hz-1.7B-CustomVoice/snapshots/0c0e3051f131929182e2c023b9537f8b1c68adfe
+Starting speech-to-speech server on ws://127.0.0.1:8765/v1/realtime...
+LLM Model: gemma4:31b | LLM Endpoint: http://127.0.0.1:11434/v1 | Timeout: 300s | TTS Backend: torch
+3/3 Starting Gemma Avatar Frontend...
+Open browser at: http://localhost:3000
+Starting Gemma Avatar frontend on http://localhost:3000...
+$ bun --hot ./index.ts
+DeepFilterNet not available for audio enhancement: No module named 'df'
+gemma-avatar listening on http://localhost:3000/
+session backend: none — direct mode (set LOAD_BALANCER_URL or SESSION_PROXY_URL)
+[nltk_data] Error loading averaged_perceptron_tagger_eng: <urlopen
+[nltk_data]     error [Errno -3] Temporary failure in name resolution>
+Using cache found in /home/l3ung/.cache/torch/hub/snakers4_silero-vad_master
+2026-09-09 15:23:03,727 - speech_to_speech.STT.parakeet_tdt_handler - INFO - Loading Parakeet TDT model: nvidia/parakeet-tdt-0.6b-v3 on cuda
+/home/l3ung/venvs/gemma-avatar-s2s/lib/python3.13/site-packages/torch/nn/modules/rnn.py:1164: UserWarning: RNN module weights are not part of single contiguous chunk of memory. This means they need to be compacted at every call, possibly greatly increasing memory usage. To compact weights again call flatten_parameters(). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/cudnn/RNN.cpp:1479.)
+  result = _VF.lstm(
+2026-09-09 15:23:14,170 - speech_to_speech.STT.parakeet_tdt_handler - INFO - nano-parakeet model loaded successfully on cuda
+2026-09-09 15:23:14,170 - speech_to_speech.STT.parakeet_tdt_handler - INFO - Live transcription enabled for Parakeet TDT (nano_parakeet)
+2026-09-09 15:23:14,170 - speech_to_speech.STT.parakeet_tdt_handler - INFO - Warming up ParakeetTDTSTTHandler
+2026-09-09 15:23:14,246 - speech_to_speech.STT.parakeet_tdt_handler - INFO - Model warmed up and ready
+2026-09-09 15:23:14,282 - speech_to_speech.LLM.chat_completions_language_model - INFO - Warming up ChatCompletionsApiModelHandler
+2026-09-09 15:24:14,415 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-09 15:24:14,600 - speech_to_speech.LLM.chat_completions_language_model - INFO - ChatCompletionsApiModelHandler:  warmed up! time: 60.317 s
+2026-09-09 15:24:14,734 - speech_to_speech.TTS.qwen3_tts_handler - INFO - Loading Qwen3-TTS model: /home/l3ung/.cache/huggingface/hub/models--Qwen--Qwen3-TTS-12Hz-1.7B-CustomVoice/snapshots/0c0e3051f131929182e2c023b9537f8b1c68adfe via faster-qwen3-tts (torch backend)
+2026-09-09 15:24:15,031 - faster_qwen3_tts.model - INFO - Loading Qwen3-TTS model: /home/l3ung/.cache/huggingface/hub/models--Qwen--Qwen3-TTS-12Hz-1.7B-CustomVoice/snapshots/0c0e3051f131929182e2c023b9537f8b1c68adfe
+
+/bin/sh: 1: sox: not found
+2026-09-09 15:24:18,857 - sox - WARNING - SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-09-09 15:24:24,492 - qwen_tts.core.models.configuration_qwen3_tts - INFO - speaker_encoder_config is None. Initializing talker model with default values
+2026-09-09 15:24:24,493 - qwen_tts.core.models.configuration_qwen3_tts - INFO - talker_config is None. Initializing talker model with default values
+2026-09-09 15:24:24,493 - qwen_tts.core.models.configuration_qwen3_tts - INFO - speaker_encoder_config is None. Initializing talker model with default values
+2026-09-09 15:24:24,493 - qwen_tts.core.models.configuration_qwen3_tts - INFO - code_predictor_config is None. Initializing code_predictor model with default values
+2026-09-09 15:24:24,494 - qwen_tts.core.models.configuration_qwen3_tts - INFO - code_predictor_config is None. Initializing code_predictor model with default values
+2026-09-09 15:24:30,479 - qwen_tts.core.tokenizer_12hz.configuration_qwen3_tts_tokenizer_v2 - INFO - encoder_config is None. Initializing encoder with default values
+2026-09-09 15:24:30,480 - qwen_tts.core.tokenizer_12hz.configuration_qwen3_tts_tokenizer_v2 - INFO - decoder_config is None. Initializing decoder with default values
+2026-09-09 15:24:37,119 - faster_qwen3_tts.model - INFO - Building CUDA graphs...
+2026-09-09 15:24:37,131 - faster_qwen3_tts.model - INFO - CUDA graphs initialized (will capture on first run)
+2026-09-09 15:24:37,131 - faster_qwen3_tts.model - WARNING - Could not infer sample rate from base model; defaulting to 24000 Hz.
+2026-09-09 15:24:37,131 - speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3-TTS model loaded
+2026-09-09 15:24:37,131 - speech_to_speech.TTS.qwen3_tts_handler - INFO - Using Qwen3-TTS streaming chunk size 8 (~640ms audio per chunk) on faster_qwen3_tts
+2026-09-09 15:24:37,131 - speech_to_speech.TTS.qwen3_tts_handler - INFO - Warming up Qwen3TTSHandler
+2026-09-09 15:24:37,131 - faster_qwen3_tts.model - INFO - Warming up CUDA graphs...
+Warming up predictor (3 runs)...
+Capturing CUDA graph for predictor...
+CUDA graph captured!
+Warming up talker graph (3 runs)...
+Capturing CUDA graph for talker decode...
+Talker CUDA graph captured!
+2026-09-09 15:24:39,836 - faster_qwen3_tts.model - INFO - CUDA graphs captured and ready
+2026-09-09 15:24:45,755 - speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3-TTS TTFA: 5.92s (custom_voice)
+2026-09-09 15:24:46,305 - speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3-TTS generated 1.72s audio in 6.47s (RTF: 0.27, custom_voice)
+2026-09-09 15:24:46,306 - speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3TTSHandler warmed up
+2026-09-09 15:24:46,343 - speech_to_speech.api.openai_realtime.server - INFO - OpenAI Realtime API starting on ws://0.0.0.0:8765/v1/realtime (pool size 1)
+INFO:     Started server process [583]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8765 (Press CTRL+C to quit)
+Bundled page in 102ms: index.html
+INFO:     127.0.0.1:41936 - "WebSocket /v1/realtime" [accepted]
+INFO:     connection open
+2026-09-09 15:26:50,544 - [pipeline 0] speech_to_speech.api.openai_realtime.websocket_router - INFO - Client connected to pipeline 0 (session session_2c8e3ba97cab455294e98a93b27f0902)
+2026-09-09 15:26:50,604 - [pipeline 0] speech_to_speech.api.openai_realtime.handlers.session - INFO - Session configuration updated
+2026-09-09 15:27:18,050 - [pipeline 0] speech_to_speech.VAD.vad_handler - INFO - Speech started (confirmed, active=384ms, min=384ms, segment=384ms, turn=turn_1 rev=0)
+2026-09-09 15:27:18,609 - [pipeline 0] speech_to_speech.VAD.vad_handler - INFO - Speech soft-ended (segment=1460ms, active=864ms, turn=turn_1 rev=0)
+2026-09-09 15:27:18,609 - [pipeline 0] speech_to_speech.STT.parakeet_tdt_handler - INFO - Parakeet final STT start turn=turn_1 rev=0 audio=1.460s age=0.000s
+2026-09-09 15:27:18,644 - [pipeline 0] speech_to_speech.STT.parakeet_tdt_handler - INFO - Parakeet final STT done turn=turn_1 rev=0 total=0.035s lock_scope=0.035s inference=0.035s chars=12
+USER: Hello there.
+Language: en
+2026-09-09 15:27:18,651 - [pipeline 0] speech_to_speech.baseHandler - INFO - ParakeetTDTSTTHandler: 0.042 s
+2026-09-09 15:27:18,651 - [pipeline 0] speech_to_speech.STT.transcription_notifier - INFO - Transcription completed (language=en): Hello there.
+2026-09-09 15:27:27,023 - [pipeline 0] httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-09 15:27:30,243 - [pipeline 0] speech_to_speech.baseHandler - INFO - ChatCompletionsApiModelHandler: 11.582 s
+2026-09-09 15:27:30,243 - [pipeline 0] speech_to_speech.LLM.lm_output_processor - INFO - Sending to clients: text='', tools=['set_mood']
+2026-09-09 15:27:30,243 - [pipeline 0] speech_to_speech.LLM.base_openai_compatible_language_model - INFO - Tools: [ResponseFunctionToolCall(arguments='{"mood":"happy"}', call_id='call_37b56d0a1899438294bec38ab01b2929', name='set_mood', type='function_call', id='fc_9aabee8decf74c3a9e6ab7b6622e2898', namespace=None, status='completed'), ResponseFunctionToolCall(arguments='{"emoji":"😊"}', call_id='call_e5e54649f1004357a6c4a0e0fabd2c30', name='make_facial_expression', type='function_call', id='fc_9f622109a3ac443a9e97602d5b0051f1', namespace=None, status='completed')]
+2026-09-09 15:27:30,243 - [pipeline 0] speech_to_speech.LLM.lm_output_processor - INFO - Sending to clients: text='', tools=['make_facial_expression']
+2026-09-09 15:27:30,249 - [pipeline 0] speech_to_speech.api.openai_realtime.service - INFO - Token usage (response): input=857, output=31
+2026-09-09 15:27:30,253 - [pipeline 0] speech_to_speech.api.openai_realtime.handlers.response - INFO - Response done (status=completed) — this response: input_tokens=857, output_tokens=31, audio=1.46s | cumulative: input_tokens=857, output_tokens=31, audio=1.46s
+2026-09-09 15:27:30,253 - [pipeline 0] speech_to_speech.api.openai_realtime.websocket_router - INFO - Pipeline 0: response complete, listening re-enabled
+2026-09-09 15:27:30,256 - [pipeline 0] speech_to_speech.LLM.chat - INFO - Re-injecting evicted function_call for call_id=call_37b56d0a1899438294bec38ab01b2929
+2026-09-09 15:27:32,336 - [pipeline 0] httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-09 15:27:33,715 - [pipeline 0] speech_to_speech.baseHandler - INFO - ChatCompletionsApiModelHandler: 3.448 s
+2026-09-09 15:27:33,721 - [pipeline 0] speech_to_speech.LLM.base_openai_compatible_language_model - INFO - Tools: []
+ASSISTANT: Hi Dad! *waves hand*
+2026-09-09 15:27:33,734 - [pipeline 0] speech_to_speech.api.openai_realtime.service - INFO - Token usage (response): input=885, output=12
+2026-09-09 15:27:34,647 - [pipeline 0] speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3-TTS TTFA: 0.92s (custom_voice)
+2026-09-09 15:27:34,648 - [pipeline 0] speech_to_speech.TTS.qwen3_tts_handler - INFO - Last speech detected to first speech out: 16.039s (turn=turn_1 rev=0)
+2026-09-09 15:27:35,258 - [pipeline 0] speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3-TTS generated 2.12s audio in 1.54s (RTF: 1.38, custom_voice)
+2026-09-09 15:27:35,287 - [pipeline 0] speech_to_speech.api.openai_realtime.handlers.response - INFO - Response done (status=completed) — this response: input_tokens=885, output_tokens=12, audio=0.00s | cumulative: input_tokens=1742, output_tokens=43, audio=1.46s
+2026-09-09 15:27:35,287 - [pipeline 0] speech_to_speech.LLM.chat - INFO - Re-injecting evicted function_call for call_id=call_e5e54649f1004357a6c4a0e0fabd2c30
+2026-09-09 15:27:35,287 - [pipeline 0] speech_to_speech.api.openai_realtime.websocket_router - INFO - Pipeline 0: response complete, listening re-enabled
+2026-09-09 15:27:36,644 - [pipeline 0] httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-09 15:27:36,644 - [pipeline 0] speech_to_speech.LLM.base_openai_compatible_language_model - INFO - Tools: []
+2026-09-09 15:27:36,650 - [pipeline 0] speech_to_speech.api.openai_realtime.service - INFO - Token usage (response): input=929, output=1
+2026-09-09 15:27:36,650 - [pipeline 0] speech_to_speech.api.openai_realtime.handlers.response - INFO - Response done (status=completed) — this response: input_tokens=929, output_tokens=1, audio=0.00s | cumulative: input_tokens=2671, output_tokens=44, audio=1.46s
+2026-09-09 15:27:36,650 - [pipeline 0] speech_to_speech.api.openai_realtime.websocket_router - INFO - Pipeline 0: response complete, listening re-enabled
+2026-09-09 15:28:13,608 - [pipeline 0] speech_to_speech.VAD.vad_handler - INFO - Speech started (confirmed, active=384ms, min=384ms, segment=384ms, turn=turn_2 rev=0)
+2026-09-09 15:28:14,161 - [pipeline 0] speech_to_speech.STT.parakeet_tdt_handler - INFO - Parakeet progressive STT timing turn=turn_2 rev=0 audio=0.884s age=0.000s lock_scope=0.552s inference=0.552s chars=25
+2026-09-09 15:28:14,161 - [pipeline 0] speech_to_speech.STT.parakeet_tdt_handler - INFO - ParakeetSTT-Progressive: compute lock released after holding 0.55s
+2026-09-09 15:28:15,651 - [pipeline 0] speech_to_speech.VAD.vad_handler - INFO - Speech soft-ended (segment=2900ms, active=2304ms, turn=turn_2 rev=0)
+2026-09-09 15:28:15,651 - [pipeline 0] speech_to_speech.STT.parakeet_tdt_handler - INFO - Parakeet final STT start turn=turn_2 rev=0 audio=2.900s age=0.000s
+2026-09-09 15:28:15,927 - [pipeline 0] speech_to_speech.STT.parakeet_tdt_handler - INFO - ParakeetSTT-Final: compute lock released after holding 0.28s
+2026-09-09 15:28:15,928 - [pipeline 0] speech_to_speech.STT.parakeet_tdt_handler - INFO - Parakeet final STT done turn=turn_2 rev=0 total=0.277s lock_scope=0.275s inference=0.275s chars=48
+USER: Just checking to make sure everything's working.
+Language: en
+2026-09-09 15:28:15,928 - [pipeline 0] speech_to_speech.baseHandler - INFO - ParakeetTDTSTTHandler: 0.277 s
+2026-09-09 15:28:15,929 - [pipeline 0] speech_to_speech.STT.transcription_notifier - INFO - Transcription completed (language=en): Just checking to make sure everything's working.
+2026-09-09 15:28:20,863 - [pipeline 0] httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-09 15:28:21,051 - [pipeline 0] speech_to_speech.baseHandler - INFO - ChatCompletionsApiModelHandler: 5.114 s
+2026-09-09 15:28:21,051 - [pipeline 0] speech_to_speech.LLM.base_openai_compatible_language_model - INFO - Tools: [ResponseFunctionToolCall(arguments='{"gesture":"ok"}', call_id='call_651a49ff22e2476da2cae9b035a28264', name='make_hand_gesture', type='function_call', id='fc_c5611502ced34259a3ce90d5962f84ae', namespace=None, status='completed')]
+2026-09-09 15:28:21,051 - [pipeline 0] speech_to_speech.LLM.lm_output_processor - INFO - Sending to clients: text='', tools=['make_hand_gesture']
+2026-09-09 15:28:21,060 - [pipeline 0] speech_to_speech.api.openai_realtime.service - INFO - Token usage (response): input=951, output=17
+2026-09-09 15:28:21,061 - [pipeline 0] speech_to_speech.api.openai_realtime.handlers.response - INFO - Response done (status=completed) — this response: input_tokens=951, output_tokens=17, audio=2.90s | cumulative: input_tokens=3622, output_tokens=61, audio=4.36s
+2026-09-09 15:28:21,061 - [pipeline 0] speech_to_speech.api.openai_realtime.websocket_router - INFO - Pipeline 0: response complete, listening re-enabled
+2026-09-09 15:28:21,062 - [pipeline 0] speech_to_speech.LLM.chat - INFO - Re-injecting evicted function_call for call_id=call_651a49ff22e2476da2cae9b035a28264
+2026-09-09 15:28:22,348 - [pipeline 0] httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-09 15:28:24,491 - [pipeline 0] speech_to_speech.baseHandler - INFO - ChatCompletionsApiModelHandler: 3.429 s
+2026-09-09 15:28:24,491 - [pipeline 0] speech_to_speech.LLM.base_openai_compatible_language_model - INFO - Tools: []
+ASSISTANT: Everything's working perfectly on my end, Dad!
+2026-09-09 15:28:24,511 - [pipeline 0] speech_to_speech.api.openai_realtime.service - INFO - Token usage (response): input=982, output=12
+2026-09-09 15:28:25,301 - [pipeline 0] speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3-TTS TTFA: 0.81s (custom_voice)
+2026-09-09 15:28:25,301 - [pipeline 0] speech_to_speech.TTS.qwen3_tts_handler - INFO - Last speech detected to first speech out: 9.651s (turn=turn_2 rev=0)
+2026-09-09 15:28:27,960 - [pipeline 0] speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3-TTS generated 3.06s audio in 3.47s (RTF: 0.88, custom_voice)
+2026-09-09 15:28:28,001 - [pipeline 0] speech_to_speech.api.openai_realtime.handlers.response - INFO - Response done (status=completed) — this response: input_tokens=982, output_tokens=12, audio=0.00s | cumulative: input_tokens=4604, output_tokens=73, audio=4.36s
+2026-09-09 15:28:28,001 - [pipeline 0] speech_to_speech.api.openai_realtime.websocket_router - INFO - Pipeline 0: response complete, listening re-enabled
+^C
+Shutting down gracefully...
+
+(base) l3ung@DESKTOP-D23P7Q4:~/gemma-avatar$ 2026-09-09 15:28:47,340 - [pipeline 0] speech_to_speech.STT.parakeet_tdt_handler - INFO - Cleaning up ParakeetTDTSTTHandler
+INFO:     Shutting down
+2026-09-09 15:28:47,402 - [pipeline 0] speech_to_speech.TTS.qwen3_tts_handler - INFO - Qwen3-TTS handler cleaned up
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [583]
+✓ Pipeline stopped successfully
+^C
+(base) l3ung@DESKTOP-D23P7Q4:~/gemma-avatar$
