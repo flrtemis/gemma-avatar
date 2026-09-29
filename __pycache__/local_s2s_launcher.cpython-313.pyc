@@ -1,0 +1,16 @@
+ó
+
+    p`jÊ  ã                   ó¸   • S SK r S SKrS SKJr  S SKJr  \R                  rS r\\l        SS jr	\	" 5         S SK
+Jr  \S:X  a  \R                  " \" 5       5        gg)	é    N)ÚPath)ÚBaseOpenAICompatibleHandlerc           	      ó’   • UR                  S[        [        R                  R	                  SS5      5      5        [        U /UQ70 UD6$ )NÚrequest_timeout_sÚLOCAL_LLM_REQUEST_TIMEOUT_SÚ300)Ú
+setdefaultÚfloatÚosÚenvironÚgetÚ_ORIGINAL_SETUP)ÚselfÚargsÚkwargss      Úlocal_s2s_launcher.pyÚ_patched_setupr   
+   s>   € Ø
+×ÑÐ)¬5´·±·±Ð@]Ð_dÓ1eÓ+fÔgÜ˜4Ð1 $Ò1¨&Ñ1Ð1ó    c                  ó–  ^^• [         R                  R                  SS5      R                  5       n [         R                  R                  SS5      R                  5       nU (       a  U(       d  g [	        U 5      m[	        U5      mTR                  5       (       a  TR                  5       (       d  g SSKJn  S[        4UU4S jjnX2l	        g )NÚQWEN3_GGUF_TALKER_PATHÚ ÚQWEN3_GGUF_CODEC_PATHr   )ÚmodelsÚmodel_idc                 ó   >• TT4$ )N© )r   Ú_kwargsÚcodecÚtalkers     €€r   Ú_resolve_local_gguf_pathsÚ:_patch_qwen3_gguf_paths.<locals>._resolve_local_gguf_paths"   s
+   ø€ Øuˆ}Ðr   )
+r   r   r
+   Ústripr   Úis_fileÚqwentts_cppr   ÚstrÚresolve_gguf_paths)Útalker_pathÚ
+codec_pathÚqwentts_modelsr    r   r   s       @@r   Ú_patch_qwen3_gguf_pathsr*      s’   ù€ Ü—*‘*—.‘.Ð!9¸2Ó>×DÑDÓF€KÜ—‘—‘Ð 7¸Ó<×BÑBÓD€JÞžjØä
++Ó
+€FÜÓ€EØ>‰>×Ñ 5§=¡=§?¡?Øå4ð¬C÷ ð ð )BÕ%r   )ÚmainÚ__main__)ÚreturnN)r   ÚsysÚpathlibr   Ú:speech_to_speech.LLM.base_openai_compatible_language_modelr   Úsetupr   r   r*   Úspeech_to_speech.s2s_pipeliner+   Ú__name__Úexitr   r   r   Ú<module>r5      s`   ðó 
+Û 
+Ý å bð .×3Ñ3€ò2ð
+ %3Ð Ô !ôBñ& Ô õ /ð ˆzÓØ‡H‚H‰T‹VÕð r   
