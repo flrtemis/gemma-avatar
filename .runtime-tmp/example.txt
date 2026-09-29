@@ -1,1 +1,1 @@
-This folder would contain the actual files you choose to upload via the paperclip option on the screen, in order for you to directly share files with the model.
+This folder would contain the actual files you choose to upload, via the paperclip option on the screen, in order for you to directly share files with the model.
