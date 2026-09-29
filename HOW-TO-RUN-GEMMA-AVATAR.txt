@@ -1,0 +1,6 @@
+	JUST TWO SIMPLE WSL2 COMMANDS:
+cd /home/l3ung/gemma-avatar
+OLLAMA_MODEL=gemma4:26b PATH="$HOME/.bun/bin:$PATH" ./run-all-local.sh
+
+	THEN GO TO THIS URL IN A BROWSER:
+http://localhost:3000
