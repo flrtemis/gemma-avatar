@@ -76,6 +76,28 @@ Open **`http://localhost:3000`** in Chrome or Edge, and click **Start talking**.
 
 ---
 
+## 🎙️ Optional: speak with your own cloned voice (XTTS-v2)
+
+The TTS stage is swappable. Besides the bundled Qwen3-TTS voice, this repo can drive
+the avatar with a **Coqui XTTS-v2 fine-tune** (`model.pth` + `config.json` +
+`vocab.json` + a reference clip). Full guide: **[TTS-XTTS.md](TTS-XTTS.md)**.
+
+```bash
+# one-time: add Coqui TTS to the speech-to-speech venv
+source ~/venvs/gemma-avatar-s2s/bin/activate
+pip install -r requirements-xtts.txt
+
+# validate the voice folder, then launch
+python check_xtts_voice.py ~/voices/my-voice
+TTS_ENGINE=xtts XTTS_VOICE_DIR="$HOME/voices/my-voice" ./run-all-local.sh
+```
+
+`./start-speech-to-speech.sh qwen3` (or dropping `TTS_ENGINE`) goes back to the
+default engine. The realtime audio contract (PCM16 mono @ 16 kHz) is unchanged, so
+lip-sync and barge-in behave exactly as before.
+
+---
+
 ## 🧪 Testing & Verification
 
 1. **Synthetic Microphone Test:**  

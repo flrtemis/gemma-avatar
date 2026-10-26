@@ -4,3 +4,12 @@ OLLAMA_MODEL=gemma4:26b PATH="$HOME/.bun/bin:$PATH" ./run-all-local.sh
 
 	THEN GO TO THIS URL IN A BROWSER:
 http://localhost:3000
+
+	OPTIONAL: SPEAK WITH YOUR OWN CLONED VOICE (Coqui XTTS-v2)
+# one-time install inside the speech-to-speech venv
+source ~/venvs/gemma-avatar-s2s/bin/activate && pip install -r requirements-xtts.txt
+# check the voice folder, then run with the XTTS engine instead of Qwen3-TTS
+python check_xtts_voice.py ~/voices/my-voice
+TTS_ENGINE=xtts XTTS_VOICE_DIR="$HOME/voices/my-voice" \
+  OLLAMA_MODEL=gemma4:26b PATH="$HOME/.bun/bin:$PATH" ./run-all-local.sh
+# full guide: TTS-XTTS.md

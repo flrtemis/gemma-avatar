@@ -1,0 +1,12 @@
+# Extra dependency for the optional XTTS-v2 (Coqui) TTS engine.
+#
+#   pip install -r requirements-xtts.txt
+#
+# Install this into the same virtualenv that runs the speech-to-speech server
+# (default: ~/venvs/gemma-avatar-s2s). It is NOT needed for the default
+# Qwen3-TTS engine, so gemma-avatar-s2s-requirements-lock.txt stays untouched.
+#
+# coqui-tts (the maintained fork of coqui-ai/TTS) provides the `TTS` module and
+# pulls in its own inference stack (librosa, soundfile, trainer, ...).
+# torch/torchaudio/transformers are already pinned by the main lock file.
+coqui-tts>=0.28.0

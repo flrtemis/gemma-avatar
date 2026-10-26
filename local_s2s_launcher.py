@@ -327,8 +327,112 @@ def _patch_qwen3_gguf_paths() -> None:
 _patch_qwen3_gguf_paths()
 
 
-from speech_to_speech.s2s_pipeline import main
+# ── Optional XTTS-v2 (Coqui) TTS engine ──────────────────────────────
+#
+# The upstream `speech-to-speech` package only knows chatTTS/facebookMMS/
+# pocket/kokoro/qwen3. We add `--tts xtts` (or GEMMA_TTS_ENGINE=xtts) on top
+# without touching the installed package:
+#
+#   1. translate `--tts xtts` / `--xtts-*` CLI options into environment vars
+#      (argparse would reject them otherwise),
+#   2. patch `parse_arguments` so the module kwargs report tts="xtts",
+#   3. patch `get_tts_handler` to build our XttsTTSHandler for that engine.
+#
+# Everything else (VAD, STT, LLM, realtime websocket, avatar frontend) is
+# unchanged, and audio still leaves the TTS stage as PCM16 @ 16 kHz.
+
+from xtts_engine import XTTS_TTS_ALIASES, normalize_engine, strip_xtts_argv
+
+
+def _pipeline_shared_state(candidates: list[Any]) -> tuple[Any, Any]:
+    """Extract per-pipeline cancel_scope/speculative_turns injected by the s2s server."""
+    from speech_to_speech.arguments_classes.qwen3_tts_arguments import Qwen3TTSHandlerArguments
+
+    for candidate in candidates:
+        if isinstance(candidate, Qwen3TTSHandlerArguments):
+            return (
+                getattr(candidate, "cancel_scope", None),
+                getattr(candidate, "speculative_turns", None),
+            )
+    return None, None
+
+
+def _patch_xtts_support() -> None:
+    from speech_to_speech import s2s_pipeline as s2s
+
+    requested_engine = os.environ.get("GEMMA_TTS_ENGINE", "").strip().lower()
+    if requested_engine in XTTS_TTS_ALIASES:
+        os.environ["GEMMA_TTS_ENGINE"] = "xtts"
+
+    original_parse_arguments = s2s.parse_arguments
+
+    def _patched_parse_arguments():
+        sys.argv = strip_xtts_argv(list(sys.argv))
+        parsed = original_parse_arguments()
+        engine = normalize_engine(os.environ.get("GEMMA_TTS_ENGINE", "") or getattr(parsed.module_kwargs, "tts", ""))
+        if engine == "xtts":
+            os.environ["GEMMA_TTS_ENGINE"] = "xtts"
+            parsed.module_kwargs.tts = "xtts"
+            logger.info(
+                "TTS engine: xtts | voice dir: %s | speaker: %s",
+                os.environ.get("XTTS_VOICE_DIR", "<unset>"),
+                os.environ.get("XTTS_SPEAKER_WAV", "<auto>"),
+            )
+        return parsed
+
+    s2s.parse_arguments = _patched_parse_arguments
+
+    original_get_tts_handler = s2s.get_tts_handler
+
+    def _patched_get_tts_handler(
+        module_kwargs,
+        stop_event,
+        lm_response_queue,
+        send_audio_chunks_queue,
+        should_listen,
+        *args: Any,
+        **kwargs: Any,
+    ):
+        engine = normalize_engine(str(getattr(module_kwargs, "tts", "") or ""))
+        if engine != "xtts":
+            # `--local_mac_optimal_settings` (or a JSON args file) can rewrite
+            # module_kwargs.tts, so honour GEMMA_TTS_ENGINE as a fallback.
+            engine = normalize_engine(os.environ.get("GEMMA_TTS_ENGINE", ""))
+        if engine != "xtts":
+            return original_get_tts_handler(
+                module_kwargs,
+                stop_event,
+                lm_response_queue,
+                send_audio_chunks_queue,
+                should_listen,
+                *args,
+                **kwargs,
+            )
+
+        from xtts_engine import setup_kwargs_from_env
+        from xtts_tts_handler import XttsTTSHandler
+
+        setup_kwargs = setup_kwargs_from_env()
+        cancel_scope, speculative_turns = _pipeline_shared_state([*args, *kwargs.values()])
+        setup_kwargs["cancel_scope"] = cancel_scope
+        setup_kwargs["speculative_turns"] = speculative_turns
+
+        logger.info("Building XTTS TTS handler (voice dir: %s)", setup_kwargs.get("voice_dir") or "<from files>")
+        return XttsTTSHandler(
+            stop_event,
+            queue_in=lm_response_queue,
+            queue_out=send_audio_chunks_queue,
+            setup_args=(should_listen,),
+            setup_kwargs=setup_kwargs,
+        )
+
+    s2s.get_tts_handler = _patched_get_tts_handler
+    logger.debug("XTTS TTS support patched into speech_to_speech.s2s_pipeline")
 
 
 if __name__ == "__main__":
+    _patch_xtts_support()
+
+    from speech_to_speech.s2s_pipeline import main
+
     sys.exit(main())

@@ -78,6 +78,17 @@ The local launchers now default to `http://127.0.0.1:11434` for Ollama, prefer `
 the full loop without a microphone — trigger a reply from the console with
 `getClient().requestResponse()`).
 
+The TTS stage is swappable — pick the engine at startup with `TTS_ENGINE`:
+
+```bash
+./run-all-local.sh                                    # default Qwen3-TTS voice
+TTS_ENGINE=xtts XTTS_VOICE_DIR="$HOME/voices/my-voice" ./run-all-local.sh
+```
+
+`TTS_ENGINE=xtts` loads your own Coqui XTTS-v2 fine-tune (`model.pth`,
+`config.json`, `vocab.json` + reference clip). See **[TTS-XTTS.md](TTS-XTTS.md)**
+for the voice-folder layout, install steps, tuning knobs and troubleshooting.
+
 ## Layout
 
 ```
